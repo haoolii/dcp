@@ -5,18 +5,27 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      # args:
+      #   DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
     ports:
       - "3000:3000"
+      - "3001:3001"
     environment:
-      - NODE_ENV=production
+      # - NODE_ENV=production
       - DATABASE_URL=postgresql://postgres:postgres@db:5432/postgres
     depends_on:
       - db
+    
   db:
     image: postgres:latest
     ports:
-      - "5439:5432"
+      - "5432:5432"
     environment:
-      POSTGRES_USER: "${POSTGRES_USERNAME}"
-      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
-      POSTGRES_DB: "${POSTGRES_DATABASE}"
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+volumes:
+  postgres:

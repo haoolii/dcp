@@ -13,4 +13,5 @@ datasource db {
 model Foo {
   id      String @id @default(uuid())
   foo     String
+  name    String
 }

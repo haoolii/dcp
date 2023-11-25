@@ -1,9 +1,9 @@
 import { PrismaClient } from "@prisma/client"
 
-const prisma = new PrismaClient();
 
 export async function GET() {
     try {
+        const prisma = new PrismaClient();
         const foo = await prisma.foo.findFirst();
         return Response.json({ data: {
             foo
